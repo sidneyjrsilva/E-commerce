@@ -1,8 +1,9 @@
 const mongoose = require('mongoose'); // Erase if already required
+const bcrypt = require('bcrypt');
 
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
-    name:{
+    user:{
         type:String,
         required:true,
     },
@@ -21,6 +22,12 @@ var userSchema = new mongoose.Schema({
         required:true,
     },
 });
+
+userSchema.pre("save", async function (next) {
+    
+});
+
+
 
 //Export the model
 module.exports = mongoose.model('User', userSchema);

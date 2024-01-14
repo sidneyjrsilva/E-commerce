@@ -1,19 +1,17 @@
-const User=require("../models/userModel");
+const User = require("../models/userModel");
 
-
-const createUsser = async (req,res) => {
+const createUser = async (req, res) => {
     const email = req.body.email;
-    const findUser = await User.findOne(email);
-    if (!findUser) {
-        //criar novo usuario
-        const newUser = User.create(req.body);
-        res.jsson(newUser);
-    }
-else
-    {
+    const findUser = await User.find({ email: email });
+
+    if (findUser.length === 0) {
+        // criar novo usuario
+        const newUser = await User.create(req.body);
+        res.json(newUser);
+    } else {
         res.json({
-            msg: "Usuário ja existe",
-            sucess: false,
+            msg: "Usuário já existe",
+            success: false,
         });
     }
 };

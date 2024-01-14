@@ -1,12 +1,12 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
-const dcConnet = () => {
+const dbConnect = async () => {
     try {
-        const conn = mongoose.connect(process.env.MONGODB_URL);
-        console.log("database conectado");
-    }
-     catch (error) {
-        console.log("database error");
+        const conn = await mongoose.connect(process.env.MONGODB_URL);
+        console.log("Banco de dados conectado");
+    } catch (error) {
+        console.log("Erro no banco de dados", error);
     }  
 };
-module.exports = dcConnet;
+
+module.exports = dbConnect;
